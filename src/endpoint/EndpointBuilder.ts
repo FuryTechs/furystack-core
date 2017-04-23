@@ -8,7 +8,16 @@ import { EndpointEntityType } from './EndpointEntityType';
 export class EndpointBuilder {
 
     private EntityTypes: EndpointEntityType[] = [];
+
+    public GetAllEntityTypes() {
+        return this.EntityTypes.slice();
+    }
+
     private EntitySets: EndpointEntitySet[] = [];
+
+    public GetAllEntitySets() {
+        return this.EntitySets.slice();
+    }
 
     /**
      * The Builder class provides you an API to create OData ShcemaTypes
