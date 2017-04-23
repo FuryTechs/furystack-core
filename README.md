@@ -7,3 +7,68 @@
 
 
 FuryStack framework, core package.
+
+Model declaration with _@PrimaryKey_, _@Property_ and _@ForeignKey_ decorators:
+``` ts
+class RefExample {
+    @PrimaryKey
+    public Id;
+
+    @Property
+    public Value: string;
+}
+
+class MyModel {
+    @PrimaryKey
+    public Id: number;
+
+    @Property
+    public MyPropertyA: string;
+
+    @Property
+    public MyPropertyB: string;
+
+    @ForeignKey(RefExample, 'RefExample')
+    public RefExampleId: number;
+    public RefExample: RefExample;
+}
+```
+
+Accessing model metadata via Global ModelDescriptorStore, usage:
+``` ts
+const descriptor = ModelDescriptorStore.GetDescriptor(MyModel);
+/*
+
+descriptor.Object = {constructor: class MyModel { … }}
+
+descriptor.Entries = [
+  PrimaryKeyDescriptorEntry {PrimaryKey: "Id"}
+  ODataPropertyDesrciptorEntry {PropertyName: "MyPropertyA", EdmType: 0}
+  ODataPropertyDesrciptorEntry {PropertyName: "MyPropertyB", EdmType: 0}
+  ForeignKeyDescriptorEntry {ForeignKeyField: "RefExample", ReferenceName: "RefExample"}
+]
+
+descriptor..PrimaryKey = PrimaryKeyDescriptorEntry {PrimaryKey: "Id"}
+
+descriptor.Properties = [
+  ODataPropertyDesrciptorEntry {PropertyName: "MyPropertyA", EdmType: 0}
+  ODataPropertyDesrciptorEntry {PropertyName: "MyPropertyB", EdmType: 0}
+]
+
+descriptor.ForeignKeys = [
+  ForeignKeyDescriptorEntry {ForeignKeyField: "RefExample", ReferenceName: "RefExample"}
+]
+
+*/
+```
+
+Setup and endpoint with the EndpointBuilder class:
+
+``` ts
+    const builder = new EndpointBuilder('api');
+
+    builder.EntityType(MyModel);
+    builder.EntityType(RefExample);
+
+    builder.EntitySet(MyModel, 'mymodels');
+```
