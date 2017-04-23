@@ -1,8 +1,11 @@
-import { DescriptorEntryType, ForeignKeyDescriptorEntry,
-    isForeignKeyDescriptorEntry, isODataPropertyDesrciptorEntry, isPrimaryKeyDescriptorEntry,
-    ODataPropertyDesrciptorEntry,
-    PrimaryKeyDescriptorEntry,
-} from './';
+
+import { DescriptorEntryType } from './DescriptorEntryType';
+import { ForeignKeyDescriptorEntry } from './ForeignKeyDescriptorEntry';
+import { isForeignKeyDescriptorEntry } from './ForeignKeys';
+import { isODataPropertyDesrciptorEntry } from './ODataProperty';
+import { ODataPropertyDesrciptorEntry } from './ODataPropertyDescriptorEntry';
+import { isPrimaryKeyDescriptorEntry } from './PrimaryKey';
+import { PrimaryKeyDescriptorEntry } from './PrimaryKeyDescriptorEntry';
 
 export class ModelDescriptor {
     public Object: any = Object;

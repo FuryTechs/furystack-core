@@ -1,4 +1,3 @@
-import { ModelDescriptor } from '../model/ModelDescriptor';
 import { ModelDescriptorStore } from '../model/ModelDescriptorStore';
 import { EndpointEntitySet } from './EndpointEntitySet';
 import { EndpointEntityType } from './EndpointEntityType';
