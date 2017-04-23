@@ -1,4 +1,4 @@
-import { EdmType } from '../Endpoint/EdmTypes';
+import { EdmType } from '../endpoint/EdmTypes';
 import { ModelDescriptorStore } from './ModelDescriptorStore';
 import { ODataPropertyDesrciptorEntry } from './ODataPropertyDescriptorEntry';
 
