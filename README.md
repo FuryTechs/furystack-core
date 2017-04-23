@@ -60,7 +60,15 @@ descriptor.ForeignKeys = [
 ]
 
 */
+```
 
+Setup and endpoint with the EndpointBuilder class:
 
+``` ts
+    const builder = new EndpointBuilder('api');
 
+    builder.EntityType(MyModel);
+    builder.EntityType(RefExample);
+
+    builder.EntitySet(MyModel, 'mymodels');
 ```
