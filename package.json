@@ -29,6 +29,13 @@
   },
   "homepage": "https://github.com/FuryTechs/furystack-core#readme",
   "devDependencies": {
-    "typescript": "^2.3.0"
+    "typescript": "^2.3.0",
+    "@types/chai": "^3.5.1",
+    "chai": "^3.5.0",
+    "codecov": "^1.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.23",
+    "nyc": "^10.2.0"
   }
 }
