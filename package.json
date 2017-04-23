@@ -1,6 +1,6 @@
 {
   "name": "furystack-core",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha-2",
   "description": "FuryStack framework, Core package",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,14 @@
   "keywords": [
     "FuryStack",
     "Typescript",
+    "Rest API",
+    "EndpointBuilder",
+    "ModelBuilder",
     "FullStack"
+  ],
+  "files":[
+    "dist",
+    "src"
   ],
   "author": "Gallay Lajos",
   "license": "MIT",
