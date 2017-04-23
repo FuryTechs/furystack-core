@@ -1,6 +1,9 @@
 import { FilterSegment } from './ODataFilterConnection';
 import { ODataFilterExpression } from './ODataFilterExpression';
 
+/**
+ * Factory class for creating OData filter expressions and serialize them
+ */
 export class ODataFilterBuilder<T>{
 
     public filterSegments: Array<FilterSegment<T>> = [];

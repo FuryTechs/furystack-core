@@ -1,3 +1,3 @@
-export class SingleResult {
+export class SingleResult<T> {
 
 }

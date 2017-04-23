@@ -13,7 +13,6 @@ class A {
     public Id: number;
 }
 
-// tslint:disable-next-line:max-classes-per-file
 class B {
     @PrimaryKey
     public Id: number;
@@ -22,7 +21,6 @@ class B {
     public Prop: string;
 }
 
-// tslint:disable-next-line:max-classes-per-file
 class C {
     @PrimaryKey
     public Id: number;
@@ -32,7 +30,6 @@ class C {
     public B: B;
 }
 
-// tslint:disable-next-line:max-classes-per-file
 @suite
 export class DecoratorDescriptorTest {
     @test('Get descriptor for A should return a descriptor instance')
@@ -69,5 +66,12 @@ export class DecoratorDescriptorTest {
         chai.expect(aDescriptor.Properties.length).to.be.equals(0);
         chai.expect(aDescriptor.ForeignKeys.length).to.be.equals(1);
         chai.expect(aDescriptor.ForeignKeys[0]).to.be.instanceOf(ForeignKeyDescriptorEntry);
+    }
+
+    @test('Get descriptor type name for A should return A')
+    public ExpectDescriptorTypeName() {
+        const aName = ModelDescriptorStore.GetName(A);
+        chai.expect(aName).to.be.eq('A');
+
     }
 }

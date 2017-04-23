@@ -3,9 +3,12 @@ import { ODataFilterExpression } from './ODataFilterExpression';
 export type FilterArgs<T, K> = [K, string];
 export type FilterSegment<T> = ODataFilterExpression<T> | ODataFilterConnection<T>;
 
+/**
+ * This class represents a logical 'And' or 'Or' expressions between OData Query expression segments.
+ */
 export class ODataFilterConnection<T>{
 
-    private type: string;
+    private type: 'and' | 'or';
     constructor(public filterBuilderRef: ODataFilterBuilder<T>) { }
 
     /**
