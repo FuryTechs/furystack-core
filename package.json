@@ -1,0 +1,34 @@
+{
+  "name": "furystack-core",
+  "version": "1.0.0",
+  "description": "FuryStack framework, Core package",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "tsc -p tsconfig.test.json",
+    "test": "nyc mocha -p tsconfig.test.json test-js/test/index.js",
+    "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
+    "test:watch": "mocha-typescript-watch -p tsconfig.test.json ./test-js/test/index.js",
+    "mock": "tsc && node dist/mock.js",
+    "tslint": "tslint src/index.ts"
+  },
+  "nyc": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FuryTechs/furystack-core.git"
+  },
+  "keywords": [
+    "FuryStack",
+    "Typescript",
+    "FullStack"
+  ],
+  "author": "Gallay Lajos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FuryTechs/furystack-core/issues"
+  },
+  "homepage": "https://github.com/FuryTechs/furystack-core#readme",
+  "devDependencies": {
+    "typescript": "^2.3.0"
+  }
+}
