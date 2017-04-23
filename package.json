@@ -1,8 +1,9 @@
 {
   "name": "furystack-core",
-  "version": "1.0.0-alpha-2",
+  "version": "1.0.0-alpha-3",
   "description": "FuryStack framework, Core package",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "pretest": "tsc -p tsconfig.test.json",
