@@ -1,5 +1,5 @@
 export class CollectionResult<T> {
-    "@odata.context": string;
-    "@odata.nextlink": string;
-    value: T[]
+    public '@odata.context': string;
+    public '@odata.nextlink': string;
+    public value: T[];
 }
