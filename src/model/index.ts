@@ -5,4 +5,5 @@ export * from './ForeignKeyDescriptorEntry';
 export * from './ODataPropertyDescriptorEntry';
 export * from './PrimaryKeyDescriptorEntry';
 export * from './DescriptorEntryType';
+export * from './ModelDescriptor';
 export * from './ModelDescriptorStore';

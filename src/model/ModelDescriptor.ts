@@ -4,14 +4,10 @@ import { DescriptorEntryType, ForeignKeyDescriptorEntry,
     PrimaryKeyDescriptorEntry,
 } from './';
 
-export class DecoratorDescriptor {
+export class ModelDescriptor {
     public Object: any = Object;
     public Entries: DescriptorEntryType[];
 
-    /**
-     *
-     */
-    // tslint:disable-next-line:no-empty
     constructor(object: any, entries: DescriptorEntryType[]) {
         this.Object = object;
         this.Entries = entries;
