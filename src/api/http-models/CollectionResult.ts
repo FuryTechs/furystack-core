@@ -1,5 +1,8 @@
 export class CollectionResult<T> {
     public '@odata.context'?: string;
     public '@odata.nextlink'?: string;
-    constructor(public value: T[]) { }
+    public '@odata.count'?: number;
+    constructor(public value: T[], count?: number, context?: string, nextlink?: string) {
+        this['@odata.count'] = count;
+    }
 }
