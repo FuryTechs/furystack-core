@@ -10,5 +10,12 @@ export class CustomAction<TBody, TReturns> {
                        public readonly BodyType: {new(): TBody},
                        public readonly ReturnsType: {new(): TReturns}) {
 
+                        this.BodyTypeName = this.BodyType.name;
+                        this.ReturnTypeName = this.ReturnsType.name;
+
     }
+
+    public readonly BodyTypeName: string;
+
+    public readonly ReturnTypeName: string;
 }

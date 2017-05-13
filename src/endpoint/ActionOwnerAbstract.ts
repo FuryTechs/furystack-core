@@ -11,7 +11,7 @@ export class ActionOwnerAbstract {
             bodyType?: {new(): TBody},
             returnsType?: {new(): TReturns}): CustomAction<TBody, TReturns> {
 
-        const existing = this.CustomActions[name as any];
+        const existing = this.CustomActions.find((a) => a.Name === name);
         if (existing) {
             return existing as CustomAction<TBody, TReturns>;
         }
@@ -20,7 +20,7 @@ export class ActionOwnerAbstract {
             throw Error('RequestType, BodyType and ReturnsType are required, when you define a custom action');
         }
         const newAction = new CustomAction(name, RequestType, bodyType, returnsType);
-        this.CustomActions[name as any] = newAction;
+        this.CustomActions.push(newAction);
         return newAction;
     }
 }
