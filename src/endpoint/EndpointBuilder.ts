@@ -1,11 +1,12 @@
 import { ModelDescriptorStore } from '../model/ModelDescriptorStore';
+import { ActionOwnerAbstract } from './';
 import { EndpointEntitySet } from './EndpointEntitySet';
 import { EndpointEntityType } from './EndpointEntityType';
 
 /**
  * The Builder class provides you an API to create OData ShcemaTypes
  */
-export class EndpointBuilder {
+export class EndpointBuilder extends ActionOwnerAbstract {
 
     private EntityTypes: EndpointEntityType[] = [];
 
@@ -23,7 +24,9 @@ export class EndpointBuilder {
      * The Builder class provides you an API to create OData ShcemaTypes
      * @param NameSpaceRoot The root of the public Express route where the Builder will be accessible
      */
-    constructor(public NameSpaceRoot: string) { }
+    constructor(public NameSpaceRoot: string) {
+        super();
+    }
 
     /**
      * Returns an EntityType for the model class (and registers it to the Builder is neccessary)
