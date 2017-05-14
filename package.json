@@ -1,6 +1,6 @@
 {
   "name": "furystack-core",
-  "version": "1.0.0-alpha-11",
+  "version": "1.0.0-alpha-13",
   "description": "FuryStack framework, Core package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
