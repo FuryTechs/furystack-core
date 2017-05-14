@@ -63,8 +63,7 @@ export class EndpointBuilder extends ActionOwnerAbstract {
             if (entitySetsWithType.length === 1) {
                 return entitySetsWithType[0];
             } else {
-                throw Error(`Cannot get EntitySet for type ${entityTypeName}.
-                There are '${entitySetsWithType.length}' sets defined with the same on this endpoint`);
+                throw Error(`Cannot get EntitySet for type ${entityTypeName}. There are '${entitySetsWithType.length}' sets defined with the same on this endpoint`);
             }
         }
 
@@ -72,8 +71,7 @@ export class EndpointBuilder extends ActionOwnerAbstract {
 
         if (existing) {
             if (existing.EndpointEntityType.Name !== entityTypeName) {
-                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}.
-                Already registered to type '${existing.EndpointEntityType.Name}'`);
+                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}. Already registered to type '${existing.EndpointEntityType.Name}'`);
             }
             return existing;
         }

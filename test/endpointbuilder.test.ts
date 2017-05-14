@@ -60,7 +60,9 @@ export class EndpointBuilderTests {
         endPoint.EntitySet(TestClass, 'testclassentities');
         chai.expect(endPoint.GetAllEntitySets()[0].Name).to.be.eq('testclassentities');
 
-        const addFunc = () => {endPoint.EntitySet(Object, 'testclassentities'); };
+        const addFunc = () => {
+            endPoint.EntitySet(Test2, 'testclassentities');
+        };
         chai.expect(addFunc).to.be.throw();
     }
 
