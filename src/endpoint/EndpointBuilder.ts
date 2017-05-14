@@ -66,9 +66,9 @@ export class EndpointBuilder extends ActionOwnerAbstract {
             }
             return existing;
         }
-        const entityType = this.EntityTypes.find((e) => e.Name === entityTypeName);
+        let entityType = this.EntityTypes.find((e) => e.Name === entityTypeName);
         if (!entityType) {
-            throw new Error(`Entity type not yet added for type '${entityTypeName}', please add it first.`);
+            entityType = this.EntityType(entityTypeClass);
         }
         const newEntitySet = new EndpointEntitySet(entitySetName, entityType);
         this.EntitySets.push(newEntitySet);

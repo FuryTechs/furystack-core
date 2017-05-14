@@ -137,7 +137,7 @@ export class ODataFilterExpression<T>{
      * Todo - implement parsing logic
      * @returns
      */
-    public static FromString<T>(): ODataFilterExpression<T> {
+    public static FromString<T>(filterExpression: string): ODataFilterExpression<T> {
         throw new Error('Implement me pls :(');
     }
 

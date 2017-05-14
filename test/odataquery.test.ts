@@ -1,6 +1,6 @@
 import * as chai from 'chai';
 import { suite, test } from 'mocha-typescript';
-import { ODataQuery } from '../src';
+import { ODataFilterExpression, ODataQuery } from '../src';
 
 class Test {
     public Field: string;
@@ -105,6 +105,14 @@ export class ODataQueryTests {
                         .Equals('Number', 1)));
 
         chai.expect(f.Filter).to.be.eq(`Field ne ('Körte') or (Field eq ('Alma') and Number eq (1))`);
+    }
+
+    @test('ODataFilterExpression.FromString() should throw an error until it\'s not implemented :P')
+    public FilterFromString() {
+        const getFromString = () => {
+            return ODataFilterExpression.FromString('');
+        };
+        chai.expect(getFromString).to.throw();
     }
 
 }
