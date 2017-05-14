@@ -53,11 +53,22 @@ export class EndpointBuilder extends ActionOwnerAbstract {
      *  Register as an EntityType before adding an EntitySet
      * @param entitySetName The collection name (will be part of the API URL)
      */
-    public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName: string): EndpointEntitySet {
-
-        const existing = this.EntitySets.find((s) => s.Name === entitySetName);
+    public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName?: string): EndpointEntitySet {
 
         const entityTypeName = ModelDescriptorStore.GetName(entityTypeClass);
+
+        if (!entitySetName) {
+            const entitySetsWithType = this.EntitySets.filter((a) =>
+                a.EndpointEntityType.Name === entityTypeName);
+            if (entitySetsWithType.length === 1) {
+                return entitySetsWithType[0];
+            } else {
+                throw Error(`Cannot get EntitySet for type ${entityTypeName}.
+                There are '${entitySetsWithType.length}' sets defined with the same on this endpoint`);
+            }
+        }
+
+        const existing = this.EntitySets.find((s) => s.Name === entitySetName);
 
         if (existing) {
             if (existing.EndpointEntityType.Name !== entityTypeName) {
