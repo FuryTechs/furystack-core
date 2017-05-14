@@ -4,5 +4,7 @@ export class CollectionResult<T> {
     public '@odata.count'?: number;
     constructor(public value: T[], count?: number, context?: string, nextlink?: string) {
         this['@odata.count'] = count;
+        this['@odata.context'] = context;
+        this['@odata.nextlink'] = nextlink;
     }
 }

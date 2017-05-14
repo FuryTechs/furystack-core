@@ -1,6 +1,6 @@
 {
   "name": "furystack-core",
-  "version": "1.0.0-alpha-8",
+  "version": "1.0.0-alpha-10",
   "description": "FuryStack framework, Core package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,9 +42,9 @@
     "codecov": "^2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.3.0",
-    "mocha-typescript": "1.1.2",
-    "nyc": "^10.2.0",
-    "tslint": "^5.1.0",
+    "mocha-typescript": "^1.1.2",
+    "nyc": "10.2.0",
+    "tslint": "^5.2.0",
     "typescript": "^2.3.2"
   }
 }

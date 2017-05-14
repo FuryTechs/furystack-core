@@ -1,11 +1,12 @@
 import { ModelDescriptorStore } from '../model/ModelDescriptorStore';
+import { ActionOwnerAbstract } from './';
 import { EndpointEntitySet } from './EndpointEntitySet';
 import { EndpointEntityType } from './EndpointEntityType';
 
 /**
  * The Builder class provides you an API to create OData ShcemaTypes
  */
-export class EndpointBuilder {
+export class EndpointBuilder extends ActionOwnerAbstract {
 
     private EntityTypes: EndpointEntityType[] = [];
 
@@ -23,7 +24,9 @@ export class EndpointBuilder {
      * The Builder class provides you an API to create OData ShcemaTypes
      * @param NameSpaceRoot The root of the public Express route where the Builder will be accessible
      */
-    constructor(public NameSpaceRoot: string) { }
+    constructor(public NameSpaceRoot: string) {
+        super();
+    }
 
     /**
      * Returns an EntityType for the model class (and registers it to the Builder is neccessary)
@@ -50,22 +53,31 @@ export class EndpointBuilder {
      *  Register as an EntityType before adding an EntitySet
      * @param entitySetName The collection name (will be part of the API URL)
      */
-    public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName: string): EndpointEntitySet {
-
-        const existing = this.EntitySets.find((s) => s.Name === entitySetName);
+    public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName?: string): EndpointEntitySet {
 
         const entityTypeName = ModelDescriptorStore.GetName(entityTypeClass);
 
+        if (!entitySetName) {
+            const entitySetsWithType = this.EntitySets.filter((a) =>
+                a.EndpointEntityType.Name === entityTypeName);
+            if (entitySetsWithType.length === 1) {
+                return entitySetsWithType[0];
+            } else {
+                throw Error(`Cannot get EntitySet for type ${entityTypeName}. There are '${entitySetsWithType.length}' sets defined with the same on this endpoint`);
+            }
+        }
+
+        const existing = this.EntitySets.find((s) => s.Name === entitySetName);
+
         if (existing) {
             if (existing.EndpointEntityType.Name !== entityTypeName) {
-                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}.
-                Already registered to type '${existing.EndpointEntityType.Name}'`);
+                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}. Already registered to type '${existing.EndpointEntityType.Name}'`);
             }
             return existing;
         }
-        const entityType = this.EntityTypes.find((e) => e.Name === entityTypeName);
+        let entityType = this.EntityTypes.find((e) => e.Name === entityTypeName);
         if (!entityType) {
-            throw new Error(`Entity type not yet added for type '${entityTypeName}', please add it first.`);
+            entityType = this.EntityType(entityTypeClass);
         }
         const newEntitySet = new EndpointEntitySet(entitySetName, entityType);
         this.EntitySets.push(newEntitySet);

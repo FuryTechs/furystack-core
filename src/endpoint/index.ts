@@ -1,3 +1,4 @@
+export * from './ActionOwnerAbstract';
 export * from './EdmTypes';
 export * from './EndpointBuilder';
 export * from './EndpointEntitySet';

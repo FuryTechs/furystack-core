@@ -40,7 +40,7 @@ export class ODataFilterExpression<T>{
      * @returns The next ODataFilterConnection (Fluent)
      */
     public NotEquals<K extends keyof T>(field: K, value: any) {
-        this.value = `${field} ne ${this.getFilterValueSegment(value)}'`;
+        this.value = `${field} ne ${this.getFilterValueSegment(value)}`;
         return this.Finialize();
     }
 
@@ -106,7 +106,7 @@ export class ODataFilterExpression<T>{
      */
     public Not<K extends keyof T>(build: (b: ODataFilterExpression<T>) => void) {
         const builder = ODataFilterBuilder.Create<T>();
-        build(ODataFilterBuilder.Create<T>());
+        build(builder);
         this.value = `not (${builder.toString()})`;
         return this.Finialize();
     }
@@ -118,8 +118,9 @@ export class ODataFilterExpression<T>{
      */
     public BuildFilter(build: (b: ODataFilterExpression<T>) => void) {
         const builder = ODataFilterBuilder.Create<T>();
-        build(ODataFilterBuilder.Create<T>());
-        this.value = `(${builder.toString()})`;
+        build(builder);
+        const filterString = builder.filterBuilderRef.filterSegments.map((a) => a.toString()).join(' ');
+        this.value = `(${filterString})`;
         return this.Finialize();
     }
 
@@ -136,7 +137,7 @@ export class ODataFilterExpression<T>{
      * Todo - implement parsing logic
      * @returns
      */
-    public static FromString<T>(): ODataFilterExpression<T> {
+    public static FromString<T>(filterExpression: string): ODataFilterExpression<T> {
         throw new Error('Implement me pls :(');
     }
 
