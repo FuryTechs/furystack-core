@@ -118,8 +118,9 @@ export class ODataFilterExpression<T>{
      */
     public BuildFilter(build: (b: ODataFilterExpression<T>) => void) {
         const builder = ODataFilterBuilder.Create<T>();
-        build(ODataFilterBuilder.Create<T>());
-        this.value = `(${builder.toString()})`;
+        build(builder);
+        const filterString = builder.filterBuilderRef.filterSegments.map((a) => a.toString()).join(' ');
+        this.value = `(${filterString})`;
         return this.Finialize();
     }
 

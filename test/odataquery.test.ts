@@ -95,4 +95,16 @@ export class ODataQueryTests {
         chai.expect(f.Filter).to.be.eq(`not (Field eq ('Alma'))`);
     }
 
+    @test('BuildFilter with inner BuildFilter')
+    public BuildFilterNested() {
+        const f = new ODataQuery<Test, keyof Test>()
+            .BuildFilter((filter) => filter.NotEquals('Field', 'Körte')
+                .Or.BuildFilter((inner) =>
+                    inner.Equals('Field', 'Alma')
+                        .And
+                        .Equals('Number', 1)));
+
+        chai.expect(f.Filter).to.be.eq(`Field ne ('Körte') or (Field eq ('Alma') and Number eq (1))`);
+    }
+
 }
