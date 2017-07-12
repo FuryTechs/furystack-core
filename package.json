@@ -38,7 +38,7 @@
   "homepage": "https://github.com/FuryTechs/furystack-core#readme",
   "devDependencies": {
     "@types/chai": "^4.0.0",
-    "chai": "^3.5.0",
+    "chai": "^4.1.0",
     "codecov": "^2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.3.0",
