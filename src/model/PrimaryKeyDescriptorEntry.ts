@@ -1,6 +1,6 @@
 export class PrimaryKeyDescriptorEntry {
     constructor(primaryKey: string) {
-        this.PrimaryKey = primaryKey;
+        this.primaryKey = primaryKey;
     }
-    public PrimaryKey: string;
+    public primaryKey: string;
 }

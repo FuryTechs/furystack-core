@@ -1,9 +1,9 @@
-import { ModelDescriptor } from '../model/ModelDescriptor';
-import { ActionOwnerAbstract } from './';
+import { ModelDescriptor } from "../model/ModelDescriptor";
+import { ActionOwnerAbstract } from "./";
 
 export class EndpointEntityType extends ActionOwnerAbstract {
 
-    constructor(public readonly Name: string, public readonly ModelDescriptor: ModelDescriptor) {
+    constructor(public readonly name: string, public readonly modelDescriptor: ModelDescriptor) {
         super();
     }
 }

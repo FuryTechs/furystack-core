@@ -1,118 +1,104 @@
-import * as chai from 'chai';
-import { suite, test } from 'mocha-typescript';
-import { ODataFilterExpression, ODataQuery } from '../src';
+import { expect } from "chai";
+import { ODataFilterExpression, ODataQuery } from "../src";
 
 class Test {
-    public Field: string;
-    public Number: number;
+    public field!: string;
+    public number!: number;
 }
 
-@suite
-export class ODataQueryTests {
+export const oDataQueryTests = describe("OData Query", () => {
 
-    @test('Query object should be constructed')
-    public ConstructTest() {
+    it("Query object should be constructed", () => {
         const query = new ODataQuery();
-    }
+        expect(query).to.be.instanceof(ODataQuery);
+    });
 
-    @test('BuildFilter should return a FilterBuilder ref')
-    public BuildFilter() {
-        // tslint:disable-next-line:no-object-literal-type-assertion
+    it("BuildFilter should return a FilterBuilder ref", () => {
         const q = new ODataQuery<Test, keyof Test>();
         const f = q.BuildFilter((filter) =>
-            filter.Equals('Field', 'alma')
+            filter.Equals("field", "alma")
                 .And
-                .NotEquals('Field', 'Körte')
+                .NotEquals("field", "Körte")
                 .Or
-                .LessThanOrEquals('Number', 2),
+                .LessThanOrEquals("number", 2),
         );
 
-        chai.expect(f).to.be.instanceof(ODataQuery);
-        chai.expect(f.Filter).to.be.eq(`Field eq ('alma') and Field ne ('Körte') or Number le (2)`);
-    }
+        expect(f).to.be.instanceof(ODataQuery);
+        expect(f.filter).to.be.eq(`field eq ('alma') and field ne ('Körte') or number le (2)`);
+    });
 
-    @test('BuildFilter with Equals')
-    public BuildFilterEq() {
+    it("BuildFilter with Equals", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.Equals('Field', 'Alma'));
+            .BuildFilter((filter) => filter.Equals("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field eq ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field eq ('Alma')`);
+    });
 
-    @test('BuildFilter with Equals')
-    public BuildFilterNEq() {
+    it("BuildFilter with Not Equals", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.NotEquals('Field', 'Alma'));
+            .BuildFilter((filter) => filter.NotEquals("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field ne ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field ne ('Alma')`);
+    });
 
-    @test('BuildFilter with Greater Than')
-    public BuildFilterGThan() {
+    it("BuildFilter with Greater Than", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.GreaterThan('Field', 'Alma'));
+            .BuildFilter((filter) => filter.GreaterThan("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field gt ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field gt ('Alma')`);
+    });
 
-    @test('BuildFilter with Greater Than Or Equals')
-    public BuildFilterGThanOrEq() {
+    it("BuildFilter with Greater Than Or Equals", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.GreaterThanOrEquals('Field', 'Alma'));
+            .BuildFilter((filter) => filter.GreaterThanOrEquals("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field ge ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field ge ('Alma')`);
+    });
 
-    @test('BuildFilter with Less Than')
-    public BuildFilterLesshan() {
+    it("BuildFilter with Less Than", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.LessThan('Field', 'Alma'));
+            .BuildFilter((filter) => filter.LessThan("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field lt ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field lt ('Alma')`);
+    });
 
-    @test('BuildFilter with Greater Than Or Equals')
-    public BuildFilterLessThanOrEq() {
+    it("BuildFilter with Less Than Or Equals", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.LessThanOrEquals('Field', 'Alma'));
+            .BuildFilter((filter) => filter.LessThanOrEquals("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field le ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field le ('Alma')`);
+    });
 
-    @test('BuildFilter with Has')
-    public BuildFilterHas() {
+    it("BuildFilter with Has", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.Has('Field', 'Alma'));
+            .BuildFilter((filter) => filter.Has("field", "Alma"));
 
-        chai.expect(f.Filter).to.be.eq(`Field has ('Alma')`);
-    }
+        expect(f.filter).to.be.eq(`field has ('Alma')`);
+    });
 
-    @test('BuildFilter with Not')
-    public BuildFilterNot() {
+    it("BuildFilter with Not", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.Not((not) => not.Equals('Field', 'Alma')));
+            .BuildFilter((filter) => filter.Not((not) => not.Equals("field", "Alma")));
 
-        chai.expect(f.Filter).to.be.eq(`not (Field eq ('Alma'))`);
-    }
+        expect(f.filter).to.be.eq(`not (field eq ('Alma'))`);
+    });
 
-    @test('BuildFilter with inner BuildFilter')
-    public BuildFilterNested() {
+    it("BuildFilter with inner BuildFilter", () => {
         const f = new ODataQuery<Test, keyof Test>()
-            .BuildFilter((filter) => filter.NotEquals('Field', 'Körte')
+            .BuildFilter((filter) => filter.NotEquals("field", "Körte")
                 .Or.BuildFilter((inner) =>
-                    inner.Equals('Field', 'Alma')
+                    inner.Equals("field", "Alma")
                         .And
-                        .Equals('Number', 1)));
+                        .Equals("number", 1)));
 
-        chai.expect(f.Filter).to.be.eq(`Field ne ('Körte') or (Field eq ('Alma') and Number eq (1))`);
-    }
+        expect(f.filter).to.be.eq(`field ne ('Körte') or (field eq ('Alma') and number eq (1))`);
+    });
 
-    @test('ODataFilterExpression.FromString() should throw an error until it\'s not implemented :P')
-    public FilterFromString() {
+    it("ODataFilterExpression.FromString() should throw an error until it\'s not implemented :P", () => {
         const getFromString = () => {
-            return ODataFilterExpression.FromString('');
+            return ODataFilterExpression.FromString("");
         };
-        chai.expect(getFromString).to.throw();
-    }
+        expect(getFromString).to.throw();
+    });
 
-}
+});

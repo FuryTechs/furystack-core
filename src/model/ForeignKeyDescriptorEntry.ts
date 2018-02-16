@@ -1,12 +1,12 @@
 export class ForeignKeyDescriptorEntry {
-    public ForeignKeyField: string;
-    public ReferenceName: string;
+    public foreignKeyField: string;
+    public referenceName: string;
 
     /**
      *
      */
     constructor(foreignKeyField: string, referenceName: string) {
-        this.ForeignKeyField = foreignKeyField;
-        this.ReferenceName = referenceName;
+        this.foreignKeyField = foreignKeyField;
+        this.referenceName = referenceName;
     }
 }

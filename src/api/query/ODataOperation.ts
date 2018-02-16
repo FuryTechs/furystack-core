@@ -1,4 +1,4 @@
-export abstract class ODataOperation<EntityType, Field> {
-    public Expand?: Field[];
-    public Select?: Field[];
+export abstract class ODataOperation<Field> {
+    public expand?: Field[];
+    public select?: Field[];
 }

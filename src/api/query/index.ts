@@ -1,2 +1,2 @@
-export * from './ODataOperation';
-export * from './ODataQuery';
+export * from "./ODataOperation";
+export * from "./ODataQuery";

@@ -1,30 +1,30 @@
-import { ModelDescriptorStore } from '../model/ModelDescriptorStore';
-import { ActionOwnerAbstract } from './';
-import { EndpointEntitySet } from './EndpointEntitySet';
-import { EndpointEntityType } from './EndpointEntityType';
+import { ModelDescriptorStore } from "../model/ModelDescriptorStore";
+import { ActionOwnerAbstract } from "./";
+import { EndpointEntitySet } from "./EndpointEntitySet";
+import { EndpointEntityType } from "./EndpointEntityType";
 
 /**
  * The Builder class provides you an API to create OData ShcemaTypes
  */
 export class EndpointBuilder extends ActionOwnerAbstract {
 
-    private EntityTypes: EndpointEntityType[] = [];
+    private entityTypes: EndpointEntityType[] = [];
 
     public GetAllEntityTypes() {
-        return this.EntityTypes.slice();
+        return this.entityTypes.slice();
     }
 
-    private EntitySets: EndpointEntitySet[] = [];
+    private entitySets: EndpointEntitySet[] = [];
 
     public GetAllEntitySets() {
-        return this.EntitySets.slice();
+        return this.entitySets.slice();
     }
 
     /**
      * The Builder class provides you an API to create OData ShcemaTypes
      * @param NameSpaceRoot The root of the public Express route where the Builder will be accessible
      */
-    constructor(public NameSpaceRoot: string) {
+    constructor(public nameSpaceRoot: string) {
         super();
     }
 
@@ -36,14 +36,14 @@ export class EndpointBuilder extends ActionOwnerAbstract {
 
         const entityTypeName = ModelDescriptorStore.GetName(entityTypeClass);
 
-        const existing = this.EntityTypes.find((t) => t.Name === entityTypeName);
+        const existing = this.entityTypes.find((t) => t.name === entityTypeName);
         if (existing) {
             return existing;
         }
 
         const descriptor = ModelDescriptorStore.GetDescriptor(entityTypeClass);
         const newEntityType = new EndpointEntityType(entityTypeName, descriptor);
-        this.EntityTypes.push(newEntityType);
+        this.entityTypes.push(newEntityType);
         return newEntityType;
     }
 
@@ -58,8 +58,8 @@ export class EndpointBuilder extends ActionOwnerAbstract {
         const entityTypeName = ModelDescriptorStore.GetName(entityTypeClass);
 
         if (!entitySetName) {
-            const entitySetsWithType = this.EntitySets.filter((a) =>
-                a.EndpointEntityType.Name === entityTypeName);
+            const entitySetsWithType = this.entitySets.filter((a) =>
+                a.endpointEntityType.name === entityTypeName);
             if (entitySetsWithType.length === 1) {
                 return entitySetsWithType[0];
             } else {
@@ -67,20 +67,20 @@ export class EndpointBuilder extends ActionOwnerAbstract {
             }
         }
 
-        const existing = this.EntitySets.find((s) => s.Name === entitySetName);
+        const existing = this.entitySets.find((s) => s.name === entitySetName);
 
         if (existing) {
-            if (existing.EndpointEntityType.Name !== entityTypeName) {
-                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}. Already registered to type '${existing.EndpointEntityType.Name}'`);
+            if (existing.endpointEntityType.name !== entityTypeName) {
+                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}. Already registered to type '${existing.endpointEntityType.name}'`);
             }
             return existing;
         }
-        let entityType = this.EntityTypes.find((e) => e.Name === entityTypeName);
+        let entityType = this.entityTypes.find((e) => e.name === entityTypeName);
         if (!entityType) {
             entityType = this.EntityType(entityTypeClass);
         }
         const newEntitySet = new EndpointEntitySet(entitySetName, entityType);
-        this.EntitySets.push(newEntitySet);
+        this.entitySets.push(newEntitySet);
         return newEntitySet;
     }
 }

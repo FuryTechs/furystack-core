@@ -1,10 +1,10 @@
-import { FilterSegment } from './ODataFilterConnection';
-import { ODataFilterExpression } from './ODataFilterExpression';
+import { FilterSegment } from "./ODataFilterConnection";
+import { ODataFilterExpression } from "./ODataFilterExpression";
 
 /**
  * Factory class for creating OData filter expressions and serialize them
  */
-export class ODataFilterBuilder<T>{
+export class ODataFilterBuilder<T> {
 
     public filterSegments: Array<FilterSegment<T>> = [];
 
@@ -23,6 +23,6 @@ export class ODataFilterBuilder<T>{
      * @returns The Filter query expression
      */
     public toString(): string {
-        return this.filterSegments.map((s) => s.toString()).join(' ');
+        return this.filterSegments.map((s) => s.toString()).join(" ");
     }
 }

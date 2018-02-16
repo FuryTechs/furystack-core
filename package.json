@@ -1,17 +1,19 @@
 {
   "name": "furystack-core",
-  "version": "1.0.0-alpha-13",
+  "version": "1.0.0-alpha-14",
   "description": "FuryStack framework, Core package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "pretest": "tsc -p tsconfig.test.json",
-    "test": "nyc mocha -p tsconfig.test.json test-js/test/index.js",
-    "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
-    "test:watch": "mocha-typescript-watch -p tsconfig.test.json ./test-js/test/index.js",
-    "mock": "tsc && node dist/mock.js",
-    "tslint": "tslint src/index.ts"
+    "pretest": "tslint --project tsconfig.test.json && rimraf temp && tsc -p tsconfig.test.json",
+    "test": "rimraf coverage && nyc mocha -p tsconfig.test.json ./temp/test/index.js",
+    "check-coverage": "istanbul check-coverage ",
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
+    "semantic-release": "semantic-release pre && semantic-release post",
+    "prebuild": "tslint --project tsconfig.json",
+    "build": "rimraf dist && tsc -p tsconfig.json",
+    "publish:development": "npm run build && npm t && npm run typedoc && npm publish --tag development",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "nyc": {},
   "repository": {
@@ -26,7 +28,7 @@
     "ModelBuilder",
     "FullStack"
   ],
-  "files":[
+  "files": [
     "dist",
     "src"
   ],
@@ -37,14 +39,16 @@
   },
   "homepage": "https://github.com/FuryTechs/furystack-core#readme",
   "devDependencies": {
-    "@types/chai": "^4.0.0",
-    "chai": "^4.1.0",
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.48",
+    "chai": "^4.1.2",
     "codecov": "^3.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.0.0",
-    "mocha-typescript": "^1.1.2",
-    "nyc": "11.3.0",
-    "tslint": "^5.2.0",
-    "typescript": "^2.3.2"
-  }
+    "nyc": "^11.4.1",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {}
 }

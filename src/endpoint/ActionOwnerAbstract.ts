@@ -1,26 +1,26 @@
-import { CustomAction } from '../';
-import { RequestMethod } from '../api/http-models/RequestMethod';
+import { CustomAction } from "../";
+import { RequestMethod } from "../api/http-models/RequestMethod";
 
 export class ActionOwnerAbstract {
 
-    private CustomActions: Array<CustomAction<any, any>> = [];
+    private customActions: Array<CustomAction<any, any>> = [];
 
     public CustomAction<TBody, TReturns>(
             name: string,
-            RequestType?: RequestMethod,
+            requestType?: RequestMethod,
             bodyType?: {new(): TBody},
             returnsType?: {new(): TReturns}): CustomAction<TBody, TReturns> {
 
-        const existing = this.CustomActions.find((a) => a.Name === name);
+        const existing = this.customActions.find((a) => a.name === name);
         if (existing) {
             return existing as CustomAction<TBody, TReturns>;
         }
 
-        if (!RequestType || !bodyType || !returnsType) {
-            throw Error('RequestType, BodyType and ReturnsType are required, when you define a custom action');
+        if (!requestType || !bodyType || !returnsType) {
+            throw Error("RequestType, BodyType and ReturnsType are required, when you define a custom action");
         }
-        const newAction = new CustomAction(name, RequestType, bodyType, returnsType);
-        this.CustomActions.push(newAction);
+        const newAction = new CustomAction(name, requestType, bodyType, returnsType);
+        this.customActions.push(newAction);
         return newAction;
     }
 }

@@ -1,8 +1,8 @@
-import { ModelDescriptorStore } from './ModelDescriptorStore';
-import { PrimaryKeyDescriptorEntry } from './PrimaryKeyDescriptorEntry';
+import { ModelDescriptorStore } from "./ModelDescriptorStore";
+import { PrimaryKeyDescriptorEntry } from "./PrimaryKeyDescriptorEntry";
 
 export function isPrimaryKeyDescriptorEntry(descriptor: any): descriptor is PrimaryKeyDescriptorEntry {
-    return (descriptor as PrimaryKeyDescriptorEntry).PrimaryKey !== undefined;
+    return (descriptor as PrimaryKeyDescriptorEntry).primaryKey !== undefined;
 }
 
 /**

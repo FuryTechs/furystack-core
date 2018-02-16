@@ -1,3 +1,3 @@
-export * from './ODataFilterBuilder';
-export * from './ODataFilterConnection';
-export * from './ODataFilterExpression';
+export * from "./ODataFilterBuilder";
+export * from "./ODataFilterConnection";
+export * from "./ODataFilterExpression";

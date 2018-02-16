@@ -1,5 +1,5 @@
-import { DescriptorEntryType } from './DescriptorEntryType';
-import { ModelDescriptor } from './ModelDescriptor';
+import { DescriptorEntryType } from "./DescriptorEntryType";
+import { ModelDescriptor } from "./ModelDescriptor";
 
 export class ModelDescriptorStore {
 
@@ -35,7 +35,7 @@ export class ModelDescriptorStore {
             const entry = new ModelDescriptor(entityTypeClass, [descriptorEntry]);
             this.descriptorsInternal.push(entry);
         } else {
-            found.Entries.push(descriptorEntry);
+            found.entries.push(descriptorEntry);
         }
     }
 }

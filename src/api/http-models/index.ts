@@ -1,2 +1,2 @@
-export * from './CollectionResult';
-export * from './RequestMethod';
+export * from "./CollectionResult";
+export * from "./RequestMethod";

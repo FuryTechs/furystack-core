@@ -1,22 +1,19 @@
-import * as chai from 'chai';
-import { suite, test } from 'mocha-typescript';
-import { EndpointBuilder } from '../src/endpoint';
-import { EndpointEntityType, ModelDescriptor, ModelDescriptorStore, PrimaryKey } from '../src/index';
+import { expect } from "chai";
+import { EndpointBuilder } from "../src/endpoint";
+import { ModelDescriptorStore, PrimaryKey } from "../src/index";
 
 class TestClass {
     @PrimaryKey
-    public id: number;
-    public val: string;
+    public id!: number;
+    public val!: string;
 }
 
-@suite
-export class EndpointEntityTypeTests {
-    @test('EndPoint should be constructed')
-    public ConstructTest() {
-        const endPoint = new EndpointBuilder('api');
+export const endpointEntityTypeTests = describe("EndpointEntityType", () => {
+
+    it("should be constructed", () => {
+        const endPoint = new EndpointBuilder("api");
         const type = endPoint.EntityType(TestClass);
+        expect(type.name).to.be.eq(ModelDescriptorStore.GetName(TestClass));
+    });
 
-        chai.expect(type.Name).to.be.eq(ModelDescriptorStore.GetName(TestClass));
-    }
-
-}
+});

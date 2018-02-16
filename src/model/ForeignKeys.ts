@@ -1,10 +1,10 @@
-import { ForeignKeyDescriptorEntry } from './ForeignKeyDescriptorEntry';
-import { ModelDescriptorStore } from './ModelDescriptorStore';
+import { ForeignKeyDescriptorEntry } from "./ForeignKeyDescriptorEntry";
+import { ModelDescriptorStore } from "./ModelDescriptorStore";
 
 export function isForeignKeyDescriptorEntry(descriptor: any): descriptor is ForeignKeyDescriptorEntry {
-    return (descriptor as ForeignKeyDescriptorEntry).ForeignKeyField !== undefined
+    return (descriptor as ForeignKeyDescriptorEntry).foreignKeyField !== undefined
         &&
-        (descriptor as ForeignKeyDescriptorEntry).ReferenceName !== undefined;
+        (descriptor as ForeignKeyDescriptorEntry).referenceName !== undefined;
 }
 
 export function ForeignKey<T>(foreignClassType: { new (): T }, foreignKeyFieldName: string) {

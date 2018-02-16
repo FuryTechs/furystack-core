@@ -1,10 +1,10 @@
-import { ActionOwnerAbstract } from './';
-import {EndpointEntityType} from './EndpointEntityType';
+import { ActionOwnerAbstract } from "./";
+import {EndpointEntityType} from "./EndpointEntityType";
 
 export class EndpointEntitySet extends ActionOwnerAbstract {
 
-    constructor(public readonly Name: string,
-                public readonly EndpointEntityType: EndpointEntityType) {
+    constructor(public readonly name: string,
+                public readonly endpointEntityType: EndpointEntityType) {
             super();
     }
 }
